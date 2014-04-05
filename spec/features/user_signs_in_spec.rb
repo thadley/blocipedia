@@ -15,6 +15,8 @@ feature 'signs in to app' do
 
     scenario 'Successfully' do
        login_as(user, :scope => :user)
+       visit welcome_index_path
+       expect( page ). to have_content('Sign out')
     end
 
     scenario 'with password missing' do
