@@ -54,3 +54,5 @@ end
 
 gem 'devise'
 gem 'figaro'
+gem 'redcarpet'
+

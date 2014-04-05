@@ -14,8 +14,17 @@
         <%= link_to "Sign In", new_user_session_path %>
     <% end %>
 
-<p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p>
+    <% if flash[:notice] %>
+          <%= flash[:notice] %>
+        </div>
+    <% elsif flash[:error] %>
+          <%= flash[:error] %>
+        </div>
+    <% elsif flash[:alert] %>
+          <%= flash[:alert] %>
+        </div>
+    <% end %>
+
 
 <%= yield %>
 
