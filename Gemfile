@@ -56,4 +56,4 @@ gem 'devise'
 gem 'figaro'
 gem 'redcarpet'
 gem 'pundit'
-
+gem 'bootstrap-sass'
