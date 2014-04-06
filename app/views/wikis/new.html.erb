@@ -5,7 +5,7 @@
     <%= form_for @wiki do |f| %>
       <%= f.text_field :title, class: 'form-control', placeholder: 'Title' %>
       <%= f.text_area :body, rows: 12, class: 'form-control', placeholder: 'Body' %>
+      <%= f.submit 'Save', class: 'btn btn-info' %>
     <% end %>
 
-    <button type="submit" class="btn btn-default">Submit</button>
   </div>

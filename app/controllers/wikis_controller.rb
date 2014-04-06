@@ -18,6 +18,10 @@ class WikisController < ApplicationController
     @wiki = Wiki.find(params[:id])
   end
 
+  def index
+    @wikis = Wiki.all
+  end
+
 private
 
   def wiki_params
