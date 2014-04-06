@@ -8,9 +8,16 @@ user = FactoryGirl.create(:user)
 user.save
 
 feature 'creates wiki with Markdown syntax' do
+
+    before :each do
+        logout(:user)
+        visit new_user_session_path
+    end
+
     scenario 'Successfully' do
         login_as(user, :scope => :user)
         visit new_wiki_path
+        expect( page ).to have_content('Sign out')
         fill_in 'Title', with: 'Title'
         fill_in 'Body', with: 'This is the body of the wiki. This *is* **Markdown**.'
         click_button 'Save'
@@ -21,6 +28,7 @@ feature 'creates wiki with Markdown syntax' do
     scenario 'with missing title' do
         login_as(user, :scope => :user)
         visit new_wiki_path
+        expect( page ).to have_content('Sign out')
         fill_in 'Title', with: ''
         fill_in 'Body', with: 'This is the body of the wiki. This *is* **Markdown**.'
         click_button 'Save'
@@ -31,13 +39,22 @@ feature 'creates wiki with Markdown syntax' do
     scenario 'with missing body' do
         login_as(user, :scope => :user)
         visit new_wiki_path
+        expect( page ).to have_content('Sign out')
         fill_in 'Title', with: 'Title'
         fill_in 'Body', with: ''
         click_button 'Save'
         expect( page ).to have_content('There was an error creating your wiki')
         expect( page ).to have_content('New Wiki')
     end
+
+    scenario 'without being signed in' do
+        visit new_wiki_path
+        expect( page ).to have_content('not allowed to')
+        expect( page ).to have_content('Sign In')
+    end
 end
+
+Warden.test_reset!
 
 # Feature: User creates wiki with Markdown syntax
 
@@ -56,3 +73,7 @@ end
 #   User goes to the wiki creation page
 #   User submits title of new wiki
 #   User sees error message and is redirected to wiki creation page
+
+# Scenario: without being signed in
+#   User goes to the wiki creation page
+#   User sees error message and is redirected to home page
