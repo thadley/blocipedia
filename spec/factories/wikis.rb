@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :wiki do
-    title "MyString"
-    body "MyString"
+    title "Title"
+    body "This is the body of the wiki."
   end
 end
