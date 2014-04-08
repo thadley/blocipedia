@@ -7,11 +7,10 @@ user = FactoryGirl.create(:user)
 user.save
 
 feature 'creates private wiki' do
-
     scenario 'Successfully' do
         visit new_user_session_path
-        # Refactor for premium user when authorizations are created
         login_as(user, :scope => :user)
+        user.update_attribute(:role, 'premium')
         visit new_wiki_path
         expect( page ).to have_content('Sign out')
         fill_in 'Title', with: 'Title'
