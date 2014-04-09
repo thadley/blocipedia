@@ -23,7 +23,8 @@ class ApplicationPolicy
   end
 
   def update?
-    user.present?
+  #  Rails.logger.debug "in update? user is #{user.inspect} and record is #{record.inspect}"
+    user.present? && (record.user == user || user.role?(:admin))
   end
 
   def edit?

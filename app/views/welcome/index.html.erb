@@ -1,10 +1,13 @@
 <h1>Blocipedia: Social, Markdown Wikis</h1>
 <p>
-    <% if current_user %>
-    <ul> Create a
-    <%= link_to "new wiki", new_wiki_path %> </ul>
-    <ul> Create private, collaborative wikis with a
-    <%= link_to "premium account", 'new_charges_path' %> </ul>
+    <% if current_user && current_user.role?(:premium) %>
+        <ul> Create a
+        <%= link_to "new wiki", new_wiki_path %> </ul>
+    <% elsif current_user %>
+        <ul> Create a
+        <%= link_to "new wiki", new_wiki_path %> </ul>
+        <ul> Create private, collaborative wikis with a
+        <%= link_to "premium account", 'new_charges_path' %> </ul>
     <% else %>
         Create and share your own >>
         <%= link_to "Sign Up", new_user_registration_path %>

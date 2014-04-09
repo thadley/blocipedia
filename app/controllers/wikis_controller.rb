@@ -5,7 +5,7 @@ class WikisController < ApplicationController
   end
 
   def create
-    @wiki = Wiki.new(wiki_params)
+    @wiki = current_user.wikis.build(wiki_params)
     if  @wiki.save
         redirect_to @wiki, notice: "Your wiki was created successfully"
     else
