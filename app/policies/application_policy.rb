@@ -22,13 +22,13 @@ class ApplicationPolicy
     create?
   end
 
-  # def update?
-  #   false
-  # end
+  def update?
+    user.present?
+  end
 
-  # def edit?
-  #   update?
-  # end
+  def edit?
+    update?
+  end
 
   # def destroy?
   #   false

@@ -22,6 +22,22 @@ class WikisController < ApplicationController
     @wikis = Wiki.all
   end
 
+  def edit
+    @wiki = Wiki.find(params[:id])
+    authorize @wiki
+  end
+
+  def update
+    @wiki = Wiki.find(params[:id])
+    authorize @wiki
+   if  @wiki.save
+    redirect_to @wiki, notice: "Your wiki was edited"
+   else
+    flash[:error] = "There was an error editing your wiki"
+    render :new
+   end
+  end
+
 private
 
   def wiki_params
