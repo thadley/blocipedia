@@ -1,5 +1,8 @@
 <h1>Wiki Index</h1>
 
+
 <% @wikis.each do |wiki| %>
+<% if @wiki.private == true %>
 <%= link_to (markdown wiki.title), [wiki] %>
+<% end %>
 <% end %>

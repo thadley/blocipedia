@@ -1,17 +1,16 @@
 class WikisController < ApplicationController
   def new
     @wiki = Wiki.new
-    @users = User.all
+    @users = User.all_except(current_user)
     authorize @wiki
   end
 
   def create
     @wiki = current_user.wikis.build(wiki_params)
-    Rails.logger.debug "@@@@@@@@ #{@wiki.inspect}"
+    @wiki.user = current_user
 
     if current_user.save
-        redirect_to :root
-        #redirect_to @wiki, notice: "Your wiki was created successfully"
+        redirect_to @wiki, notice: "Your wiki was created successfully"
     else
         flash[:error] = "There was an error creating your wiki"
         @users = User.all
@@ -29,7 +28,7 @@ class WikisController < ApplicationController
 
   def edit
     @wiki = Wiki.find(params[:id])
-    @users = User.all
+    @users = User.all_except(current_user)
     authorize @wiki
   end
 
@@ -47,6 +46,7 @@ class WikisController < ApplicationController
 private
 
   def wiki_params
-    params.require(:wiki).permit(:title, :body, :private, :collaborators)
+    params.require(:wiki).permit(:title, :body, :private, :collaborators => [])
   end
+
 end
