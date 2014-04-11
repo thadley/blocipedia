@@ -6,10 +6,15 @@
       <%= f.text_field :title, class: 'form-control', placeholder: 'Title' %>
       <%= f.text_area :body, rows: 12, class: 'form-control', placeholder: 'Body' %>
 
-     <% if policy(@wiki).private? %>
+     <% if policy(@wiki).premium? %>
+        Add collaborators: 
+        <% @users.each do |user| %>
+          <ul> <%= check_box_tag :collaborators, user.id %>
+          <%= user.username || user.email %> </ul>
+        <% end %>
       <%= f.label :private %>
       <%= f.check_box :private %>
-     <% end %> 
+     <% end %>
       
       <%= f.submit 'Save', class: 'btn btn-info' %>
     <% end %>

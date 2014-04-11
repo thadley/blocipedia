@@ -1,6 +1,6 @@
 class WikiPolicy < ApplicationPolicy
 
-  def private?
+  def premium?
     user.role?(:admin) or user.role?(:premium)
   end
 
