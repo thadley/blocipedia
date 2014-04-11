@@ -71,6 +71,8 @@ GEM
     figaro (0.7.0)
       bundler (~> 1.0)
       rails (>= 3, < 5)
+    friendly_id (5.0.3)
+      activerecord (>= 4.0.0)
     haml (4.0.5)
       tilt
     hike (1.2.3)
@@ -191,6 +193,7 @@ DEPENDENCIES
   devise
   factory_girl_rails (~> 4.0)
   figaro
+  friendly_id
   haml
   jbuilder (~> 1.2)
   jquery-rails
