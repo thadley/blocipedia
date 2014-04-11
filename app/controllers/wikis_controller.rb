@@ -15,7 +15,10 @@ class WikisController < ApplicationController
   end
 
   def show
-    @wiki = Wiki.find(params[:id])
+    @wiki = Wiki.find_by_slug(params[:id])
+    if request.path != wiki_path(@wiki)
+      redirect_to @wiki, status: :moved_permanently
+    end
   end
 
   def index
@@ -23,12 +26,12 @@ class WikisController < ApplicationController
   end
 
   def edit
-    @wiki = Wiki.find(params[:id])
+    @wiki = Wiki.find_by_slug(params[:id])
     authorize @wiki
   end
 
   def update
-    @wiki = Wiki.find(params[:id])
+    @wiki = Wiki.find_by_slug(params[:id])
     authorize @wiki
    if  @wiki.save
     redirect_to @wiki, notice: "Your wiki was edited"
