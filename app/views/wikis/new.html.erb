@@ -12,8 +12,11 @@
           <ul> <%= check_box_tag :collaborators, user.id %>
           <%= user.username || user.email %> </ul>
         <% end %>
-      <%= f.label :private %>
-      <%= f.check_box :private %>
+      
+    <div class = "field">
+      <%= f.check_box :is_private %>
+      <%= f.label "Private" %>
+    </div>
      <% end %>
       
       <%= f.submit 'Save', class: 'btn btn-info' %>
