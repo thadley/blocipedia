@@ -13,7 +13,6 @@ class WikisController < ApplicationController
         redirect_to @wiki, notice: "Your wiki was created successfully"
     else
         flash[:error] = "There was an error creating your wiki"
-        @users = User.all
         render :new
     end
   end
@@ -46,7 +45,7 @@ class WikisController < ApplicationController
 private
 
   def wiki_params
-    params.require(:wiki).permit(:title, :body, :is_private, :collaborators => [])
+    params.require(:wiki).permit(:title, :body, :is_private)
   end
 
 end
