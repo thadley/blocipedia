@@ -1,4 +1,13 @@
-<h1><%= markdown @wiki.title %></h1>
-<p><%= markdown @wiki.body %></p>
+  <h1><%= markdown @wiki.title %></h1>
+  <p><%= markdown @wiki.body %></p>
 
-<%= link_to "Edit", edit_wiki_path %>
+    <p>
+     <% if policy(@wiki).update? %>
+      <%= link_to "Edit", edit_wiki_path, class: 'btn btn-primary btn-sm' %>
+     <% end %>
+    </p>
+    <p>
+     <% if policy(@wiki).destroy? %>
+      <%= link_to "Delete", @wiki, method: :delete, class: 'btn btn-danger btn-sm', confirm: 'Are you sure you want to delete this wiki?'%>
+     <% end %>
+    </p>

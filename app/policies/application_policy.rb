@@ -23,7 +23,6 @@ class ApplicationPolicy
   end
 
   def update?
-    # Rails.logger.debug "in update? user is #{user.inspect} and record is #{record.inspect}"
     user.present? && (record.user == user)
   end
 
@@ -31,9 +30,9 @@ class ApplicationPolicy
     update?
   end
 
-  # def destroy?
-  #   false
-  # end
+  def destroy?
+    false
+  end
 
   def scope
     record.class

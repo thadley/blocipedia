@@ -10,8 +10,6 @@ class Wiki < ActiveRecord::Base
   extend FriendlyId
    friendly_id :title, use: [:slugged, :history]
 
-  # def should_genereate_new_friendly_id?
-  #   new_record?
-  # end
+  scope :visible_to, ->(user) { user ? scoped : where(is_private: false) }
 
 end
