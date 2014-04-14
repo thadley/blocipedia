@@ -19,13 +19,14 @@ class WikisController < ApplicationController
 
   def show
     @wiki = Wiki.find_by_slug(params[:id])
+    authorize @wiki
     if request.path != wiki_path(@wiki)
       redirect_to @wiki, status: :moved_permanently
     end
   end
 
   def index
-    @wikis = Wiki.all
+    @wikis = Wiki.visible_to(current_user)
   end
 
   def edit
@@ -41,7 +42,18 @@ class WikisController < ApplicationController
     redirect_to @wiki, notice: "Your wiki was edited"
    else
     flash[:error] = "There was an error editing your wiki"
-    render :new
+    render :edit
+   end
+  end
+
+  def destroy
+    @wiki = Wiki.find_by_slug(params[:id])
+    authorize @wiki
+   if  @wiki.save
+    redirect_to :root, notice: "Your wiki was deleted"
+   else
+    flash[:error] = "There was an error deleting your wiki"
+    render :show
    end
   end
 
