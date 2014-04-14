@@ -6,14 +6,17 @@ Warden.test_mode!
 user = FactoryGirl.create(:user)
 user.save
 
-wiki = FactoryGirl.create(:wiki)
-wiki.save
-
 feature 'edits wiki' do
     scenario 'Successfully' do
         login_as(user, :scope => :user)
+        # creates own wiki to have proper authorization to edit
+        visit new_wiki_path
+        expect( page ).to have_content('Sign out')
+        fill_in 'Title', with: 'Title5'
+        fill_in 'Body', with: 'This is the body of the wiki.'
+        click_button 'Save'
         visit wikis_path
-        click_link 'Title'
+        click_link 'Title5'
         click_link 'Edit Wiki'
         expect( page ).to have_content('Edit Wiki')
         click_button 'Save'
