@@ -12,4 +12,6 @@ class Wiki < ActiveRecord::Base
 
   scope :visible_to, ->(user) { user ? scoped : where(is_private: false) }
 
+  default_scope -> { order('created_at DESC') }
+  
 end

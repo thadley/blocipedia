@@ -36,7 +36,9 @@ class WikisController < ApplicationController
   end
 
   def update
+    params[:wiki][:collaborator_ids] ||= []
     @wiki = Wiki.find_by_slug(params[:id])
+    @wiki.update_attributes(wiki_params)
     authorize @wiki
    if  @wiki.save
     redirect_to @wiki, notice: "Your wiki was edited"
@@ -60,7 +62,7 @@ class WikisController < ApplicationController
 private
 
   def wiki_params
-    params.require(:wiki).permit(:title, :body, :is_private)
+    params.require(:wiki).permit(:title, :body, :is_private, :collaborator_ids => [])
   end
 
 end
