@@ -8,8 +8,9 @@ class WikisController < ApplicationController
   def create
     @wiki = current_user.wikis.build(wiki_params)
     @wiki.user = current_user
+    authorize @wiki
 
-    if current_user.save
+    if @wiki.save
         redirect_to @wiki, notice: "Your wiki was created successfully"
     else
         flash[:error] = "There was an error creating your wiki"

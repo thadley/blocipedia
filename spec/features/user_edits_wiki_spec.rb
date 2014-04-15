@@ -15,9 +15,10 @@ feature 'edits wiki' do
         fill_in 'Title', with: 'Title5'
         fill_in 'Body', with: 'This is the body of the wiki.'
         click_button 'Save'
+        expect( page ).to have_content('Your wiki was created successfully')
         visit wikis_path
         click_link 'Title5'
-        click_link 'Edit Wiki'
+        click_link 'Edit'
         expect( page ).to have_content('Edit Wiki')
         click_button 'Save'
         expect( page ).to have_content('Your wiki was edited')

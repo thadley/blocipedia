@@ -9,14 +9,14 @@
      <% if policy(@wiki).premium? %>
         Add collaborators: 
         <% @users.each do |user| %>
-          <ul> <%= check_box_tag "wiki[collaborator_ids][]", user.id %>
+          <ul class="collaboratorCheckbox"> <%= check_box_tag "wiki[collaborator_ids][]", user.id %>
           <%= user.username || user.email %> </ul>
         <% end %>
-      <%= f.check_box :is_private %>
-      <%= f.label "Private" %>
+      <p class="wikiCheckbox"><%= f.check_box :is_private %>
+      <%= f.label "Private" %></p>
      <% end %>
       
-      <%= f.submit 'Save', class: 'btn btn-info' %>
+    <p> <%= f.submit 'Save', class: 'btn btn-info' %> </p>
     <% end %>
 
   </div>
