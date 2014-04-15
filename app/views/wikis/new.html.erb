@@ -9,7 +9,7 @@
      <% if policy(@wiki).premium? %>
         Add collaborators: 
         <% @users.each do |user| %>
-          <ul> <%= check_box_tag :collaborators, user.id %>
+          <ul> <%= check_box_tag "wiki[collaborator_ids][]", user.id %>
           <%= user.username || user.email %> </ul>
         <% end %>
       <%= f.check_box :is_private %>

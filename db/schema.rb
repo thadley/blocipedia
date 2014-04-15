@@ -11,11 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 20140411030133) do
-=======
 ActiveRecord::Schema.define(version: 20140412224059) do
->>>>>>> private-flag
 
   create_table "friendly_id_slugs", force: true do |t|
     t.string   "slug",                      null: false
