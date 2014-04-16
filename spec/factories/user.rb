@@ -6,9 +6,4 @@ FactoryGirl.define do
     password_confirmation "helloworld"
     confirmed_at Time.now
   end
-
-  # raises 'uninitialized constant Premium (NameError)'
-    # factory :premium do
-    #     after(:create) { |user| user.role = 'premium' }
-    # end
 end

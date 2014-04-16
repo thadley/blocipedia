@@ -9,7 +9,7 @@ feature 'Guest views public wiki' do
 
     scenario 'Successfully' do
         visit wikis_path
-        expect( page ).to have_content('Wiki Index')
+        expect( page ).to have_content('Wikis')
         expect( page ).to have_content('Sign In')
         click_link 'Title'
         expect( page ).to have_content('This is the body of the wiki.')

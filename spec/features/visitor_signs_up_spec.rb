@@ -2,7 +2,6 @@ require 'spec_helper'
 
 feature 'Visitor signs up' do
   before :each do
-    logout(:user)
     visit new_user_registration_path
   end
 
